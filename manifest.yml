@@ -1,0 +1,6 @@
+declared-services:
+  wos-conversation-service:
+    label: conversation
+    plan: free
+applications:
+env:
