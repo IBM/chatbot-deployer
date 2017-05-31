@@ -30,7 +30,7 @@ services:
           $ref: pipeline.yml
           $refType: text
         env:
-          CHATBOT_JSON_URL: '{{chatbot_json_url}}'
+          CHATBOT_JSON_URL: '{{foo}}'
           PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
           PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
