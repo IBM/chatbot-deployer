@@ -1,6 +1,9 @@
 ---
+---
 stages:
-  - name: Load Chatbot Assets
+- name: Load Chatbot Assets
+  jobs:
+  - name: Deploy
     type: deployer
     target:
       region_id: ${PROD_REGION_ID}
@@ -9,4 +12,5 @@ stages:
       application: ${CF_APP_NAME}
     script: |
       #!/bin/bash
+      export CHATBOT_JSON_URL=${CHATBOT_JSON_URL}
       env
