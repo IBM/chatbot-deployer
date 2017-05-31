@@ -31,7 +31,6 @@ services:
           $refType: text
         env:
           CHATBOT_JSON_URL: 'foobar'
-          CF_APP_NAME: '{{form.pipeline.parameters.prod-app-name}}'
           PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
           PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
