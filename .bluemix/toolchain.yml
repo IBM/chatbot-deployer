@@ -5,7 +5,7 @@ messages:
 template:
   name: "Chatbot Asset Deployment"
 toolchain:
-  name: 'chatbot-{{timestamp}}'
+  name: 'chatbot-{{timestamp}}-{{foo}}'
 services:
   conversation-service:
     service_id: customtool
