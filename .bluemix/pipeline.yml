@@ -11,6 +11,7 @@ stages:
       region_id: ${PROD_REGION_ID}
       organization: ${PROD_ORG_NAME}
       space: ${PROD_SPACE_NAME}
+      application: Deploy Chatbot Assets
     script: |-
       #!/bin/bash
       # FOO
