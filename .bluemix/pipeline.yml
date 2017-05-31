@@ -1,20 +1,12 @@
 ---
 stages:
-- name: MyStage
-  jobs:
-  - name: Deploy
+  - name: Load Chatbot Assets
     type: deployer
-    fail_stage: true
     target:
-      region_id: ${CF_REGION_ID}
-      organization: ${CF_ORGANIZATION}
-      space: ${CF_SPACE}
-      application: ${CF_APP}
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
+      application: ${CF_APP_NAME}
     script: |
       #!/bin/bash
       env
-hooks:
-- enabled: true
-  label: null
-  ssl_enabled: false
-  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish

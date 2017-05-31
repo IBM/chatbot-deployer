@@ -1,0 +1,40 @@
+
+version: '2'
+messages:
+  $i18n: locales.yml
+template:
+  name: "Chatbot Asset Deployment"
+  required:
+    - conversation-service
+toolchain:
+  name: 'chatbot-{{timestamp}}'
+services:
+  conversation-service:
+    service_id: customtool
+    parameters:
+      type: Watson Conversation
+      lifecyclePhase: "MANAGE"
+      imageUrl: https://watson-api-explorer.mybluemix.net/images/watson-apis/Conversation.svg
+      documentationUrl: https://www.ibm.com/watson/developercloud/doc/conversation/index.html
+      name: Workspaces
+      dashboard_url: https://www.ibmwatsonconversation.com
+      description: Workspaces enable you to maintain separate intents, user examples, entities, and dialogs for each use or application.
+      additional-properties:
+  load-bot-assets:
+    service_id: pipeline
+    parameters:
+      services:
+        - conversation-service
+      name: 'Load Chatbot Assets'
+      ui-pipeline: true
+      configuration:
+        content:
+          $ref: pipeline.yml
+          $refType: text
+        env:
+          CHATBOT_JSON_URL: '{{chatbot_json_url}}'
+          CF_APP_NAME: '{{form.pipeline.parameters.prod-app-name}}'
+          PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
+          PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
+          PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
+        execute: true
