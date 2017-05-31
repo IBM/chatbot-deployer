@@ -11,5 +11,5 @@ stages:
       application: ${CF_APP_NAME}
     script: |
       #!/bin/bash
-      export CHATBOT_JSON_URL=${CHATBOT_JSON_URL}
+      export CHATBOT_JSON_URL=foo
       env
