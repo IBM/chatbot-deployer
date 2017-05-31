@@ -1,5 +1,7 @@
 
 version: '2'
+messages:
+  $i18n: locales.yml
 template:
   name: "Chatbot Asset Deployment"
 toolchain:
