@@ -1,5 +1,4 @@
 ---
----
 stages:
 - name: Load Chatbot Assets
   jobs:
