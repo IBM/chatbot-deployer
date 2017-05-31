@@ -1,8 +1,8 @@
 ---
 stages:
-- name: MyStage
+- name: Deploy assets
   jobs:
-  - name: Deploy Chatbot Assets
+  - name: Deploy Chatbot Assetsx
     type: deployer
     target:
       region_id: ibm:yp:us-south
@@ -11,6 +11,7 @@ stages:
       application: Load Chatbot Assets
     script: |-
       #!/bin/bash
+      # FOO
       echo ${CHATBOT_JSON_URL}
 hooks:
 - enabled: true
