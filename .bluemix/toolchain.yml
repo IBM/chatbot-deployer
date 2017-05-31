@@ -2,8 +2,6 @@
 version: '2'
 template:
   name: "Chatbot Asset Deployment"
-  required:
-    - conversation-service
 toolchain:
   name: 'chatbot-{{timestamp}}'
 services:

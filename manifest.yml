@@ -1,6 +1,0 @@
-declared-services:
-  conversation-service:
-    label: conversation
-    plan: free
-applications:
-
