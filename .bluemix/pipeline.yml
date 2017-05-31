@@ -11,7 +11,7 @@ stages:
       application: Load Chatbot Assets
     script: |-
       #!/bin/bash
-      echo foo
+      echo ${CHATBOT_JSON_URL}
 hooks:
 - enabled: true
   label: null
