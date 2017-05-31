@@ -1,26 +1,21 @@
 ---
 stages:
-- name: Deploy assets
+- name: Deploy Chatbot
   properties:
-  - name: foo
-    value: bar
-    type: text
-  - name: chatbot_json_url
+  - name: CHATBOT_JSON_URL
     value: '${CHATBOT_JSON_URL}'
-  - name: chatbot_json_url_noquote
-    value: ${CHATBOT_JSON_URL}
   jobs:
-  - name: Deploy Chatbot Assetsx
+  - name: Deploy Chatbot Assets
     type: deployer
     target:
-      region_id: ibm:yp:us-south
-      organization: Developer Advocacy
-      space: dev
-      application: Load Chatbot Assets
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
+      application: ${CF_APP_NAME}
     script: |-
       #!/bin/bash
       # FOO
-      echo ${CHATBOT_JSON_URL}
+      echo $CHATBOT_JSON_URL
 hooks:
 - enabled: true
   label: null
