@@ -1,15 +1,19 @@
 ---
 stages:
-- name: Load Chatbot Assets
+- name: MyStage
   jobs:
-  - name: Deploy
+  - name: Deploy Chatbot Assets
     type: deployer
     target:
-      region_id: ${PROD_REGION_ID}
-      organization: ${PROD_ORG_NAME}
-      space: ${PROD_SPACE_NAME}
-      application: ${CF_APP_NAME}
-    script: |
+      region_id: ibm:yp:us-south
+      organization: Developer Advocacy
+      space: dev
+      application: Load Chatbot Assets
+    script: |-
       #!/bin/bash
-      export CHATBOT_JSON_URL=foo
-      env
+      echo foo
+hooks:
+- enabled: true
+  label: null
+  ssl_enabled: false
+  url: https://devops-api.ng.bluemix.net/v1/messaging/webhook/publish
