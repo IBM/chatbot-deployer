@@ -5,7 +5,7 @@ messages:
 template:
   name: "Chatbot Asset Deployment"
 toolchain:
-  name: 'chatbot-{{timestamp}}-{{foo}}'
+  name: 'chatbot-deploy-{{timestamp}}-{{foo}}'
 services:
   conversation-service:
     service_id: customtool
@@ -23,7 +23,7 @@ services:
     parameters:
       services:
         - conversation-service
-      name: 'Load Chatbot Assets'
+      name: 'Load Chatbot Assets {{foo}}'
       ui-pipeline: true
       configuration:
         content:
