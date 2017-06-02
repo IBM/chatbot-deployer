@@ -1,0 +1,1 @@
+watson-developer-cloud>=0.25.2
