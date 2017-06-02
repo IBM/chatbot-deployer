@@ -30,7 +30,7 @@ services:
           $ref: pipeline.yml
           $refType: text
         env:
-          CHATBOT_JSON_URL: 'staticfoo'
+          CHATBOT_JSON_URL: '{{chatbotWorkspaceURL}}'
           PROD_SPACE_NAME: 'dev'
           PROD_ORG_NAME: 'Developer Advocacy'
           PROD_REGION_ID: 'ibm:yp:us-south'
