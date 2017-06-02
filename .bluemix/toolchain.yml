@@ -31,7 +31,7 @@ services:
           $refType: text
         env:
           CHATBOT_JSON_URL: 'staticfoo'
-          PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
-          PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
-          PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
+          PROD_SPACE_NAME: 'dev'
+          PROD_ORG_NAME: 'Developer Advocacy'
+          PROD_SPACE_NAME: 'ibm:yp:us-south'
         execute: true
