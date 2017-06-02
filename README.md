@@ -1,2 +1,2 @@
 
-<a href="https://console.bluemix.net/devops/setup/deploy?repository=https%3A//git.ng.bluemix.net/adam.gandelman/chatbot-deploy">test deploy</a>
+<a href="https://console.bluemix.net/devops/setup/deploy?repository=https%3A//git.ng.bluemix.net/adam.gandelman/chatbot-deploy&chatbotWorkspaceURL=https%3A//git.ng.bluemix.net/adam.gandelman/chatbot-deploy/raw/master/tmp/workspace.json">test deploy</a>
