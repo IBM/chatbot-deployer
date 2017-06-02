@@ -5,6 +5,9 @@ stages:
   - name: CHATBOT_JSON_URL
     value: '${CHATBOT_JSON_URL}'
     type: text
+  - name: CHATBOT_NAME
+    value: '${CHATBOT_JSON_URL}'
+    type: text
   jobs:
   - name: Deploy Chatbot Assets
     type: deployer
@@ -15,8 +18,11 @@ stages:
       application: Load Chatbot Assets
     script: |-
       #!/bin/bash
-      # FOO
-      echo $CHATBOT_JSON_URL
+      # XXX: Update this URL when the repo finds a home
+      git clone https://git.ng.bluemix.net/adam.gandelman/chatbot-deploy/
+      cd chatbot-deploy
+      pip install -r requirements.txt
+      python ./scripts/deploy.py
 hooks:
 - enabled: true
   label: null

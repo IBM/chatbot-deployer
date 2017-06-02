@@ -5,7 +5,7 @@ messages:
 template:
   name: "Chatbot Asset Deployment"
 toolchain:
-  name: 'xychatbot-deploy-{{timestamp}}-{{foo}}'
+  name: 'chatbot-deploy-{{chatbotName}}-{{timestamp}}'
 services:
   conversation-service:
     service_id: customtool
@@ -31,6 +31,7 @@ services:
           $refType: text
         env:
           CHATBOT_JSON_URL: '{{chatbotWorkspaceURL}}'
+          CHATBOT_NAME: '{{chatbotName}}-{{timestamp}}'
           PROD_SPACE_NAME: 'dev'
           PROD_ORG_NAME: 'adam.gandelman'
           PROD_REGION_ID: 'ibm:yp:us-south'
