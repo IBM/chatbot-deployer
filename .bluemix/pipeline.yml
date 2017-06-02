@@ -6,7 +6,7 @@ stages:
     value: '${CHATBOT_JSON_URL}'
     type: text
   - name: CHATBOT_NAME
-    value: '${CHATBOT_JSON_URL}'
+    value: '${CHATBOT_NAME}'
     type: text
   jobs:
   - name: Deploy Chatbot Assets
