@@ -32,7 +32,9 @@ stages:
       fi
 
       # Also create similarly named service key / credential for the service
-      cf create-service-key $CHATBOT_NAME $CHATBOT_NAME
+      if ! cf service-key $CHATBOT_NAME $CHATBOT_NAME >/dev/null; then
+        cf create-service-key $CHATBOT_NAME $CHATBOT_NAME
+      fi
 
       # Query the service credential
       npm install -g json
