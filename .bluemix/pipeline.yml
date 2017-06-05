@@ -18,11 +18,57 @@ stages:
       application: Load Chatbot Assets
     script: |-
       #!/bin/bash
-      # XXX: Update this URL when the repo finds a home
-      git clone https://git.ng.bluemix.net/adam.gandelman/chatbot-deploy/
-      cd chatbot-deploy
-      pip install -r requirements.txt
-      python ./scripts/deploy.py
+      # Fetch the workspace json from the marketplace
+      # This is largely lifted from:
+      #  https://github.com/open-toolchain/watson-training-toolchain/blob/master/.bluemix/pipeline.yml
+      if ! curl -O workspace.json $CHATBOT_JSON_URL; then
+        echo "Failed to fetch workspace for chatbot $CHATBOT_NAME from $CHATBOT_JSON_URL."
+        exit 1
+      fi
+
+      # Create the conversation service and name it after the chatbot
+      if ! cf service $CHATBOT_NAME; then
+        cf create-service conversation free $CHATBOT_NAME
+      fi
+
+      # Also create similarly named service key / credential for the service
+      cf create-service-key $CHATBOT_NAME $CHATBOT_NAME
+
+      # Query the service credential
+      npm install -g json
+      jsonkey=$( cf service-key $CHATBOT_NAME $CHATBOT_NAME | tail -n +3 )
+      wcuser=$( echo $jsonkey | json username )
+      wcpass=$( echo $jsonkey | json password )
+      wcurl=$( echo $jsonkey | json url )
+
+      # Create workspace and train it
+      resp=$( curl --user $wcuser:$wcpass \
+                 -H "Content-Type: application/json" \
+                 -X POST -d @training/car_workspace.json \
+                 $wcurl/v1/workspaces?version=2017-04-21 )
+      echo $resp| json
+      export WORKSPACE_ID=$( echo $resp | json workspace_id )
+      if [ -z "${WORKSPACE_ID}" ]; then
+        echo "Failed creating new workspace..."
+        echo "If too many workspaces already, discard obsolete workspaces using: "
+        echo "https://www.ibmwatsonconversation.com"
+        echo "Select service instance:$CHATBOT_NAME in current org&space"
+        exit 1
+      fi
+      echo "##############################################################"
+      echo "Created and trained new workspace: WORKSPACE_ID: ${WORKSPACE_ID}"
+      echo "##############################################################"
+
+      resp=$( curl --user $wcuser:$wcpass -X GET \
+              $wcurl/v1/workspaces/$WORKSPACE_ID?version=2017-04-21 )
+      status=$?
+      echo $resp| json
+      resp_wsid=$( echo $resp | json workspace_id )
+      if [ $status -ne 0 ] || [ "$resp_wsid" != "$WORKSPACE_ID" ]; then
+        echo "Invalid workspace: $WORKSPACE_ID"
+        echo "Administer your workspaces at: https://www.ibmwatsonconversation.com"
+        exit 1
+      fi
 hooks:
 - enabled: true
   label: null
