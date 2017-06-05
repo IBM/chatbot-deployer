@@ -44,7 +44,7 @@ stages:
       # Create workspace and train it
       resp=$( curl --user $wcuser:$wcpass \
                  -H "Content-Type: application/json" \
-                 -X POST -d @training/car_workspace.json \
+                 -X POST -d @workspace.json \
                  $wcurl/v1/workspaces?version=2017-04-21 )
       echo $resp| json
       export WORKSPACE_ID=$( echo $resp | json workspace_id )
