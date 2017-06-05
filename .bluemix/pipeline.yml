@@ -21,7 +21,7 @@ stages:
       # Fetch the workspace json from the marketplace
       # This is largely lifted from:
       #  https://github.com/open-toolchain/watson-training-toolchain/blob/master/.bluemix/pipeline.yml
-      if ! curl -O workspace.json $CHATBOT_JSON_URL; then
+      if ! curl -o workspace.json $CHATBOT_JSON_URL; then
         echo "Failed to fetch workspace for chatbot $CHATBOT_NAME from $CHATBOT_JSON_URL."
         exit 1
       fi
