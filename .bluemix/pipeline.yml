@@ -27,7 +27,7 @@ stages:
       fi
 
       # Create the conversation service and name it after the chatbot
-      if ! cf service $CHATBOT_NAME; then
+      if ! cf service $CHATBOT_NAME >/dev/null; then
         cf create-service conversation free $CHATBOT_NAME
       fi
 

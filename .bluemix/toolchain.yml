@@ -21,8 +21,6 @@ services:
   load-bot-assets:
     service_id: pipeline
     parameters:
-      services:
-        - conversation-service
       name: 'Load Chatbot Assets {{foo}}'
       ui-pipeline: true
       configuration:
