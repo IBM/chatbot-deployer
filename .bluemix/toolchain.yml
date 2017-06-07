@@ -30,7 +30,13 @@ services:
         env:
           CHATBOT_JSON_URL: '{{chatbotWorkspaceURL}}'
           CHATBOT_NAME: '{{chatbotName}}-{{timestamp}}'
-          PROD_SPACE_NAME: 'dev'
-          PROD_ORG_NAME: 'jonathan.harker'
-          PROD_REGION_ID: 'ibm:yp:us-south'
+          PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
+          PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
+          PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
         execute: true
+form:
+  pipeline:
+    parameters:
+      prod-app-name: '{{services.sample-repo.parameters.repo_name}}'
+    schema:
+      $ref: deploy.json
