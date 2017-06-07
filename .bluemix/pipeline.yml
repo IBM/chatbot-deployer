@@ -12,9 +12,9 @@ stages:
   - name: Deploy Chatbot Assets
     type: deployer
     target:
-      region_id: 'ibm:yp:us-south'
-      organization: ${CF_ORG}
-      space: ${CF_SPACE}
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
       application: Load Chatbot Assets
     script: |-
       #!/bin/bash
