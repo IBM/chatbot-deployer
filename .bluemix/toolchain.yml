@@ -31,6 +31,6 @@ services:
           CHATBOT_JSON_URL: '{{chatbotWorkspaceURL}}'
           CHATBOT_NAME: '{{chatbotName}}-{{timestamp}}'
           PROD_SPACE_NAME: 'dev'
-          PROD_ORG_NAME: 'adam.gandelman'
+          PROD_ORG_NAME: 'jonathan.harker'
           PROD_REGION_ID: 'ibm:yp:us-south'
         execute: true
