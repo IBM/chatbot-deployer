@@ -16,7 +16,7 @@ stages:
       organization: ${PROD_ORG_NAME}
       space: ${PROD_SPACE_NAME}
       application: Load Chatbot Assets
-    script: |-
+    script: |
       #!/bin/bash
       # Fetch the workspace json from the marketplace
       # This is largely lifted from:
