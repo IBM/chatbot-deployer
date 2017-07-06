@@ -22,24 +22,24 @@ stages:
       # This is largely lifted from:
       #  https://github.com/open-toolchain/watson-training-toolchain/blob/master/.bluemix/pipeline.yml
 
-      if ! curl -L -o workspace.json $CHATBOT_JSON_URL; then
+      if ! curl -L -o workspace.json "$CHATBOT_JSON_URL"; then
         echo "Failed to fetch workspace for chatbot $CHATBOT_NAME from $CHATBOT_JSON_URL."
         exit 1
       fi
 
       # Create the conversation service and name it after the chatbot
       if ! cf service $CHATBOT_NAME >/dev/null; then
-        cf create-service conversation free $CHATBOT_NAME
+        cf create-service conversation free "$CHATBOT_NAME"
       fi
 
       # Also create similarly named service key / credential for the service
       if ! cf service-key $CHATBOT_NAME $CHATBOT_NAME >/dev/null; then
-        cf create-service-key $CHATBOT_NAME $CHATBOT_NAME
+        cf create-service-key "$CHATBOT_NAME" "$CHATBOT_NAME"
       fi
 
       # Query the service credential
       npm install -g json
-      jsonkey=$( cf service-key $CHATBOT_NAME $CHATBOT_NAME | tail -n +3 )
+      jsonkey=$( cf service-key "$CHATBOT_NAME" "$CHATBOT_NAME" | tail -n +3 )
       wcuser=$( echo $jsonkey | json username )
       wcpass=$( echo $jsonkey | json password )
       wcurl=$( echo $jsonkey | json url )
