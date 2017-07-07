@@ -8,7 +8,7 @@ from subprocess import check_output
 from watson_developer_cloud import ConversationV1
 
 
-TMP_WORKSPACE = 'https://git.ng.bluemix.net/adam.gandelman/chatbot-deploy/raw/master/tmp/workspace.json'
+TMP_WORKSPACE = 'https://github.com/IBM/chatbot-deployer/raw/master/tmp/workspace.json'
 TMP_CHATBOT_NAME = 'Chatbot'
 
 def run_cf(cmd):
