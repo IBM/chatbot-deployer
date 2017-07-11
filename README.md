@@ -10,5 +10,9 @@ By hitting ``https://console.bluemix.net/devops/setup/deploy`` with three argume
 2. Bot Name, for example ``chatbotName=myCoolBot``
 3. Workspace URL, for example: ``chatbotWorkspaceURL=https%3A//github.com/IBM/chatbot-deployer/raw/master/tmp/workspace.json``
 
-See this link for a full example:
+Click this link to try it out:
 <a href="https://console.bluemix.net/devops/setup/deploy?repository=https%3A//github.com/IBM/chatbot-deployer&chatbotName=Chatbot&chatbotWorkspaceURL=https%3A//github.com/IBM/chatbot-deployer/raw/master/tmp/workspace.json">test deploy</a>
+
+## Example
+
+![](launch.gif)
