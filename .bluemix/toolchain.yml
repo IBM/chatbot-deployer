@@ -25,7 +25,8 @@ services:
       ui-pipeline: true
       configuration:
         content:
-          $text: pipeline.yml
+          $ref: pipeline.yml
+          $refType: text
         env:
           CHATBOT_JSON_URL: '{{chatbotWorkspaceURL}}'
           CHATBOT_NAME: '{{chatbotName}}-{{timestamp}}'
