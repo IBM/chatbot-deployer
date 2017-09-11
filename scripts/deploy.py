@@ -1,5 +1,6 @@
+#! /usr/bin/env python
 
-
+from __future__ import print_function
 import json
 import os
 import requests
@@ -11,8 +12,9 @@ from watson_developer_cloud import ConversationV1
 TMP_WORKSPACE = 'https://github.com/IBM/chatbot-deployer/raw/master/tmp/workspace.json'
 TMP_CHATBOT_NAME = 'Chatbot'
 
+
 def run_cf(cmd):
-    print 'Running cf: %s' % ' '.join(cmd)
+    print('Running cf: %s' % ' '.join(cmd))
     return check_output(cmd)
 
 
@@ -22,7 +24,7 @@ def get_service_credentials(service_name):
     # the environment via cf, which is horrible to parse.
     key = run_cf(
         ['cf', 'service-key', service_name, service_name]).splitlines()
-    j = '\n'.join(key[key.index('{'):(key.index('}')+1)])
+    j = '\n'.join(key[key.index('{'):(key.index('}') + 1)])
     return json.loads(j)
 
 
@@ -34,9 +36,10 @@ def create_conversation_service(service_name):
     run_cf(['cf', 'create-service-key', service_name, service_name])
     return get_service_credentials(service_name)
 
+
 if __name__ == '__main__':
     creds = create_conversation_service('foobar')
-    name  = os.getenv('CHATBOT_NAME', TMP_CHATBOT_NAME)
+    name = os.getenv('CHATBOT_NAME', TMP_CHATBOT_NAME)
 
     workspace_json = requests.get(
         os.getenv('CHATBOT_JSON_URL', TMP_WORKSPACE)).json()
@@ -56,6 +59,5 @@ if __name__ == '__main__':
         counterexamples=workspace_json['counterexamples'],
         metadata=workspace_json['metadata'])
 
-    print 'Created conversation workspace %s /w ID %s' % (
-        workspace['name'], workspace['workspace_id'])
-
+    fmt = 'Created conversation workspace {name} /w ID {workspace_id}'
+    print(fmt.format(**workspace))
