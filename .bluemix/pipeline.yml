@@ -27,19 +27,46 @@ stages:
         exit 1
       fi
 
-      # Create the conversation service and name it after the chatbot
-      if ! cf service $CHATBOT_NAME >/dev/null; then
+      # List the conversation services, for example:
+      # $ cf services | grep conversation
+      # Chatbot-20170822164726835   conversation          free                create succeeded
+      # Conversation-hf             conversation          free                create succeeded
+      # NOTE: the -c option for grep counts number of rows
+      result=$(cf services | grep -c conversation)
+
+      # if no consersation exists, create service and service key, name after the chatbot
+      if [ "$result" -eq 0 ]; then
         cf create-service conversation free "$CHATBOT_NAME"
-      fi
-
-      # Also create similarly named service key / credential for the service
-      if ! cf service-key $CHATBOT_NAME $CHATBOT_NAME >/dev/null; then
         cf create-service-key "$CHATBOT_NAME" "$CHATBOT_NAME"
+      # if more than one exists, issue a warning
+      elif [ "$result" -gt 1 ]; then
+        echo "found more than one conversation service, using the first found"
+        # TODO: Use the paid service over the free?
       fi
+      # Finally, we get the service name, either newly created or first result
+      service_name=$(cf services | grep conversation | cut -d " " -f1)
 
-      # Query the service credential
+      # Fetch service key name for the service, for example:
+      # $ cf service-keys Conversation-hf
+      # Getting keys for service instance Conversation-hf
+      #
+      # name
+      # Credentials-1
+      # NOTE: Use tail -1 to get the last line in the output
+      # TODO: What if there are multiple service keys?
+      credentials=$(cf service-keys "$service_name" | tail -1)
+
+      # Fetch the service key credentials, parse it with json, for example:
+      # $ cf service-key Conversation-hf Credentials-1
+      # Getting key Credentials-1 for service instance Conversation-hf
+      #
+      # {
+      # "password": "superSecretFakePassword",
+      # "url": "https://gateway.watsonplatform.net/conversation/api",
+      # "username": "fe874f2f-73bb-4698-8b09-e43ffe89629a"
+      # }
       npm install -g json
-      jsonkey=$( cf service-key "$CHATBOT_NAME" "$CHATBOT_NAME" | tail -n +3 )
+      jsonkey=$( cf service-key "$service_name" "$credentials" | tail -n +3 )
       wcuser=$( echo $jsonkey | json username )
       wcpass=$( echo $jsonkey | json password )
       wcurl=$( echo $jsonkey | json url )
