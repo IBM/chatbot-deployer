@@ -36,14 +36,16 @@ stages:
 
       # if no consersation exists, create service and service key, name after the chatbot
       if [ "$result" -eq 0 ]; then
-        cf create-service conversation free "$CHATBOT_NAME"
-        cf create-service-key "$CHATBOT_NAME" "$CHATBOT_NAME"
+        now=$(date +"%m%d%Y%H%M")
+        cf create-service conversation free "BAE"$now
+        cf create-service-key "BAE"$now "BAE"$now
       # if more than one exists, issue a warning
       elif [ "$result" -gt 1 ]; then
         echo "found more than one conversation service, using the first found"
         # TODO: Use the paid service over the free?
       fi
       # Finally, we get the service name, either newly created or first result
+      # TODO: This won't work if there's a space in the name
       service_name=$(cf services | grep conversation | cut -d " " -f1)
 
       # Fetch service key name for the service, for example:
