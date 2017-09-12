@@ -17,7 +17,7 @@ stages:
       space: ${PROD_SPACE_NAME}
       application: Load Chatbot Assets
     script: |
-      #!/bin/bash -ex
+      #!/bin/bash -x
       # Fetch the workspace json from the marketplace
       # This is largely lifted from:
       #  https://github.com/open-toolchain/watson-training-toolchain/blob/master/.bluemix/pipeline.yml
