@@ -17,25 +17,20 @@ stages:
       space: ${PROD_SPACE_NAME}
       application: Load Chatbot Assets
     script: |
-      #!/bin/bash -x
-      # Fetch the workspace json from the marketplace
-      # This is largely lifted from:
-      #  https://github.com/open-toolchain/watson-training-toolchain/blob/master/.bluemix/pipeline.yml
+      #!/bin/bash -ex
 
+      # Fetch the workspace json from the marketplace
       if ! curl -L -o workspace.json "$CHATBOT_JSON_URL"; then
         echo "Failed to fetch workspace for chatbot $CHATBOT_NAME from $CHATBOT_JSON_URL."
         exit 1
       fi
 
-      # List the conversation services, for example:
+      # List the conversation services, if no conversation exists, create service
+      # and service key for example:
       # $ cf services | grep conversation
       # Chatbot-20170822164726835   conversation    free    create succeeded
       # Conversation-hf conversation    free    create succeeded
-      BAE_EXISTS=$(cf services | grep conversation | grep BAE)
-      echo "Does a BAE service exist?: $SERVICE_NAME"
-
-      # if no conversation exists, create service and service key
-      if [ -z "$BAE_EXISTS" ]; then
+      if ! cf services | grep conversation | grep BAE; then
         now=$(date +"%m%d%Y%H%M")
         SERVICE_NAME="BAE$now"
         echo "Creating new conversation service ... "
@@ -44,9 +39,9 @@ stages:
         echo "============================================================="
         echo "Created new conversation service: SERVICE_NAME: $SERVICE_NAME"
         echo "============================================================="
-
       fi
-      # Finally, we get the service name, either newly created or first result
+
+      # Get the service name, either newly created or first result
       SERVICE_NAME=$(cf services | grep conversation | grep BAE | cut -d " " -f1)
       echo "======================================================="
       echo "Using conversation service: SERVICE_NAME: $SERVICE_NAME"
@@ -84,7 +79,6 @@ stages:
         echo "Failed creating new workspace..."
         echo "If too many workspaces already, discard obsolete workspaces using: "
         echo "https://www.ibmwatsonconversation.com"
-        echo "Select service instance $SERVICE_NAME in current org and space"
         exit 1
       fi
 
