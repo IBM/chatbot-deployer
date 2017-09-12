@@ -29,24 +29,28 @@ stages:
 
       # List the conversation services, for example:
       # $ cf services | grep conversation
-      # Chatbot-20170822164726835   conversation          free                create succeeded
-      # Conversation-hf             conversation          free                create succeeded
-      # NOTE: the -c option for grep counts number of rows
-      result=$(cf services | grep -c conversation)
+      # Chatbot-20170822164726835   conversation    free    create succeeded
+      # Conversation-hf conversation    free    create succeeded
+      BAE_EXISTS=$(cf services | grep conversation | grep BAE)
+      echo "Does a BAE service exist?: $SERVICE_NAME"
 
-      # if no consersation exists, create service and service key, name after the chatbot
-      if [ "$result" -eq 0 ]; then
+      # if no conversation exists, create service and service key
+      if [ -z "$BAE_EXISTS" ]; then
         now=$(date +"%m%d%Y%H%M")
-        cf create-service conversation free "BAE"$now
-        cf create-service-key "BAE"$now "BAE"$now
-      # if more than one exists, issue a warning
-      elif [ "$result" -gt 1 ]; then
-        echo "found more than one conversation service, using the first found"
-        # TODO: Use the paid service over the free?
+        SERVICE_NAME="BAE$now"
+        echo "Creating new conversation service ... "
+        cf create-service conversation free "$SERVICE_NAME"
+        cf create-service-key "$SERVICE_NAME" "$SERVICE_NAME"
+        echo "============================================================="
+        echo "Created new conversation service: SERVICE_NAME: $SERVICE_NAME"
+        echo "============================================================="
+
       fi
       # Finally, we get the service name, either newly created or first result
-      # TODO: This won't work if there's a space in the name
-      service_name=$(cf services | grep conversation | cut -d " " -f1)
+      SERVICE_NAME=$(cf services | grep conversation | grep BAE | cut -d " " -f1)
+      echo "======================================================="
+      echo "Using conversation service: SERVICE_NAME: $SERVICE_NAME"
+      echo "======================================================="
 
       # Fetch service key name for the service, for example:
       # $ cf service-keys Conversation-hf
@@ -56,43 +60,43 @@ stages:
       # Credentials-1
       # NOTE: Use tail -1 to get the last line in the output
       # TODO: What if there are multiple service keys?
-      credentials=$(cf service-keys "$service_name" | tail -1)
+      CREDENTIALS=$(cf service-keys "$SERVICE_NAME" | tail -1)
 
       # Fetch the service key credentials, parse it with json, for example:
       # $ cf service-key Conversation-hf Credentials-1
       # Getting key Credentials-1 for service instance Conversation-hf
-      #
-      # {
-      # "password": "superSecretFakePassword",
-      # "url": "https://gateway.watsonplatform.net/conversation/api",
-      # "username": "fe874f2f-73bb-4698-8b09-e43ffe89629a"
-      # }
       npm install -g json
-      jsonkey=$( cf service-key "$service_name" "$credentials" | tail -n +3 )
+      jsonkey=$( cf service-key "$SERVICE_NAME" "$CREDENTIALS" | tail -n +3 )
       wcuser=$( echo $jsonkey | json username )
       wcpass=$( echo $jsonkey | json password )
       wcurl=$( echo $jsonkey | json url )
 
-      # Create workspace and train it
+      # Upload workspace
       resp=$( curl --user $wcuser:$wcpass \
                  -H "Content-Type: application/json" \
                  -X POST -d @workspace.json \
                  $wcurl/v1/workspaces?version=2017-04-21 )
-      echo $resp| json
-      export WORKSPACE_ID=$( echo $resp | json workspace_id )
-      if [ -z "${WORKSPACE_ID}" ]; then
+      echo $resp | json
+      WORKSPACE_ID=$( echo $resp | json workspace_id )
+
+      # Handle failures
+      if [ -z "$WORKSPACE_ID" ]; then
         echo "Failed creating new workspace..."
         echo "If too many workspaces already, discard obsolete workspaces using: "
         echo "https://www.ibmwatsonconversation.com"
-        echo "Select service instance:$CHATBOT_NAME in current org&space"
+        echo "Select service instance $SERVICE_NAME in current org and space"
         exit 1
       fi
-      echo "##############################################################"
-      echo "Created and trained new workspace: WORKSPACE_ID: ${WORKSPACE_ID}"
-      echo "##############################################################"
 
+      # Print success
+      echo "=================================================="
+      echo "Created new workspace: WORKSPACE_ID: $WORKSPACE_ID"
+      echo "=================================================="
+
+      # Double check that workspace ID matches GET request
       resp=$( curl --user $wcuser:$wcpass -X GET \
               $wcurl/v1/workspaces/$WORKSPACE_ID?version=2017-04-21 )
+
       status=$?
       echo $resp| json
       resp_wsid=$( echo $resp | json workspace_id )
