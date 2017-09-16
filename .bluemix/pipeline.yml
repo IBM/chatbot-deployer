@@ -25,14 +25,13 @@ stages:
         exit 1
       fi
 
+      # Always use a constant name for the BAE Workspaces
+      SERVICE_NAME="Bot Asset Exchange Workspaces"
       # List the conversation services, if no conversation exists, create service
       # and service key for example:
       # $ cf services | grep conversation
-      # Chatbot-20170822164726835   conversation    free    create succeeded
       # Conversation-hf conversation    free    create succeeded
-      if ! cf services | grep conversation | grep BAE; then
-        now=$(date +"%m%d%Y%H%M")
-        SERVICE_NAME="BAE$now"
+      if ! cf services | grep "$SERVICE_NAME"; then
         echo "Creating new conversation service ... "
         cf create-service conversation free "$SERVICE_NAME"
         cf create-service-key "$SERVICE_NAME" "$SERVICE_NAME"
@@ -40,12 +39,6 @@ stages:
         echo "Created new conversation service: SERVICE_NAME: $SERVICE_NAME"
         echo "============================================================="
       fi
-
-      # Get the service name, either newly created or first result
-      SERVICE_NAME=$(cf services | grep conversation | grep BAE | cut -d " " -f1)
-      echo "======================================================="
-      echo "Using conversation service: SERVICE_NAME: $SERVICE_NAME"
-      echo "======================================================="
 
       # Fetch service key name for the service, for example:
       # $ cf service-keys Conversation-hf
