@@ -15,7 +15,7 @@ services:
       imageUrl: https://watson-api-explorer.mybluemix.net/images/watson-apis/Conversation.svg
       documentationUrl: https://www.ibm.com/watson/developercloud/doc/conversation/index.html
       name: Workspaces
-      dashboard_url: https://console.bluemix.net/dashboard/apps?search=BAE
+      dashboard_url: https://console.bluemix.net/dashboard/apps?search=Bot%20Asset%20Exchange%20Workspaces
       description: Workspaces enable you to maintain separate intents, user examples, entities, and dialogs for each use or application.
       additional-properties:
   load-bot-assets:
