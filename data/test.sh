@@ -23,11 +23,6 @@ if ! curl -L -o workspace.json "$CHATBOT_JSON_URL"; then
   exit 1
 fi
 
-# Debug
-echo "workspace output"
-cat workspace.json
-echo "done workspace output"
-
 # Always use a constant name for the BAE Workspaces
 SERVICE_NAME="Bot Asset Exchange Workspaces"
 # List the conversation services, if no conversation exists, create service
