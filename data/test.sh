@@ -1,5 +1,11 @@
 #!/bin/bash -ex
 
+function cleanup {
+  cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
+  sleep 2
+  cf delete-service "$SERVICE_NAME" -f
+}
+
 # Download and Install CF CLI
 wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
 echo "deb http://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
@@ -96,9 +102,3 @@ fi
 # Clean up and exit successfully
 cleanup
 exit 0
-
-function cleanup {
-  cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
-  sleep 2
-  cf delete-service "$SERVICE_NAME" -f
-}
