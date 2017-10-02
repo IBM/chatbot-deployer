@@ -70,10 +70,7 @@ if [ -z "$WORKSPACE_ID" ]; then
   echo "Failed creating new workspace..."
   echo "If too many workspaces already, discard obsolete workspaces using: "
   echo "https://www.ibmwatsonconversation.com"
-  # Delete services anyway
-  cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
-  sleep 2
-  cf delete-service "$SERVICE_NAME" -f
+  cleanup
   exit 1
 fi
 
@@ -92,16 +89,16 @@ resp_wsid=$( echo $resp | json workspace_id )
 if [ $status -ne 0 ] || [ "$resp_wsid" != "$WORKSPACE_ID" ]; then
   echo "Invalid workspace: $WORKSPACE_ID"
   echo "Administer your workspaces at: https://www.ibmwatsonconversation.com"
-  # Delete services anyway
-  cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
-  sleep 2
-  cf delete-service "$SERVICE_NAME" -f
+  cleanup
   exit 1
 fi
 
-# Clean up
-cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
-sleep 2
-cf delete-service "$SERVICE_NAME" -f
-
+# Clean up and exit successfully
+cleanup
 exit 0
+
+function cleanup {
+  cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
+  sleep 2
+  cf delete-service "$SERVICE_NAME" -f
+}
