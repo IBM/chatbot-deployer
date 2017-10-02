@@ -23,6 +23,11 @@ if ! curl -L -o workspace.json "$CHATBOT_JSON_URL"; then
   exit 1
 fi
 
+# Debug
+echo "workspace output"
+cat workspace.json
+echo "done workspace output"
+
 # Always use a constant name for the BAE Workspaces
 SERVICE_NAME="Bot Asset Exchange Workspaces"
 # List the conversation services, if no conversation exists, create service
@@ -70,6 +75,9 @@ if [ -z "$WORKSPACE_ID" ]; then
   echo "Failed creating new workspace..."
   echo "If too many workspaces already, discard obsolete workspaces using: "
   echo "https://www.ibmwatsonconversation.com"
+  # Delete services anyway
+  cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
+  cf delete-service "$SERVICE_NAME" -f
   exit 1
 fi
 
@@ -88,5 +96,14 @@ resp_wsid=$( echo $resp | json workspace_id )
 if [ $status -ne 0 ] || [ "$resp_wsid" != "$WORKSPACE_ID" ]; then
   echo "Invalid workspace: $WORKSPACE_ID"
   echo "Administer your workspaces at: https://www.ibmwatsonconversation.com"
+  # Delete services anyway
+  cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
+  cf delete-service "$SERVICE_NAME" -f
   exit 1
 fi
+
+# Clean up
+cf delete-service-key "$SERVICE_NAME" "$SERVICE_NAME" -f
+cf delete-service "$SERVICE_NAME" -f
+
+exit 0
