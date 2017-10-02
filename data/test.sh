@@ -14,7 +14,7 @@ cf login -a https://api.ng.bluemix.net -u apikey -p $BLUEMIX_API_KEY -o "Develop
 # except we define a CHATBOT_JSON_URL and CHATBOT_NAME here for testing purposes
 ################
 
-CHATBOT_JSON_URL="https%3A%2F%2Fgithub.com%2FIBM%2Fchatbot-deployer%2Fraw%2Fmaster%2Fdata%2Fworkspace.json"
+CHATBOT_JSON_URL="https://github.com/IBM/chatbot-deployer/raw/master/data/workspace.json"
 CHATBOT_NAME="Test_Chatbot"
 
 # Fetch the workspace json from the marketplace
