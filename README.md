@@ -1,3 +1,5 @@
+![Bluemix Deployments](https://metrics-tracker.mybluemix.net/stats/3dafda64b9efbd06391d5f090bd89113/badge.svg)
+
 # Bluemix Pipeline based Chatbot Deployer
 
 The chatbot deployer is a [Bluemix pipeline](https://console.bluemix.net/docs/services/ContinuousDelivery/pipeline_working.html#pipeline-working) plugin that is to be used in the new [Bot Asset Exchange](https://developer.ibm.com/code/exchanges/bots/).
