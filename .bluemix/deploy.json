@@ -32,6 +32,12 @@
             },
             "type": "string",
             "pattern": "\\S"
+        },
+        "metrics-tracker": {
+            "description": {
+                "$ref": "#/messages/deploy.metricsDescription"
+            },
+            "type": "string"
         }
     },
     "required": [
@@ -52,6 +58,12 @@
                 "$ref": "#/messages/deploy.appName"
             },
             "key": "prod-app-name"
+        },
+        {
+            "type": "text",
+            "readonly": false,
+            "title": "Disable Metrics Tracker",
+            "key": "metrics-tracker"
         },
         {
             "type": "table",
