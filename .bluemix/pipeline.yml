@@ -84,7 +84,7 @@ stages:
       # Tracking Metrics
       if [ "yes" != "$(echo "$DISABLE_METRIC" | awk '{print tolower($0)}')" ]; then
       space_id=$(cf space ${CF_SPACE} --guid)
-      service_id=$(cf service Bot\ Asset\ Exchange\ Workspaces --guid)
+      service_id=$(cf service "Bot Asset Exchange Workspaces" --guid)
       config='{"repository_id": "chatbot-deployer",
              "target_runtimes": [],
              "target_services": ["Conversation"],

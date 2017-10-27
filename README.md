@@ -39,9 +39,9 @@ Click [this link](https://console.bluemix.net/devops/setup/deploy?repository=htt
 
 ## Privacy Notice
 
-Sample DevOps pipeline that include this package may be configured to track deployments to [IBM Bluemix](https://www.bluemix.net/) and other platforms. The following information is sent to a [Deployment Tracker](https://github.com/IBM/metrics-collector-service) service on each deployment:
+The DevOps pipeline that is included in this package is configured by default with a [Deployment Tracker](https://github.com/IBM/metrics-collector-service) tool. The following information is sent when a user deploys an asset from the Bot Asset Exchange:
 
-* Space ID (`space_id`)
+* Space ID
 * Conversation Service GUID
 * Chatbot Name
 
