@@ -49,4 +49,4 @@ By default, this data is collected from the IBM Cloud DevOps pipeline environmen
 
 ## Disabling Deployment Tracking
 
-To opt-out the tracker, Simply select `YES` in *Disable Metrics Tracker* under the **Delivery Pipeline** section when you create your IBM Cloud DevOps pipeline.
+To opt-out the tracker, Simply select `NO` in *Metrics Tracker* under the **Delivery Pipeline** section when you create your IBM Cloud DevOps pipeline.

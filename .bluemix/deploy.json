@@ -39,8 +39,8 @@
             },
             "type": "string",
                 "enum": [
-                "NO",
-                "YES"
+                "YES",
+                "NO"
              ]
         }
     },
@@ -68,8 +68,8 @@
         "readonly": false,
         "key": "metrics-tracker",
         "titleMap": {
-           "NO": "NO",
            "YES": "YES",
+           "NO": "NO",
         },
         "items": [
             {

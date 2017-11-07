@@ -14,6 +14,9 @@ stages:
   - name: DISABLE_METRIC
     value: '${DISABLE_METRIC}'
     type: text
+  - name: TRACKER_URL
+    value: '${TRACKER_URL}'
+    type: text
   jobs:
   - name: Deploy Chatbot Assets
     type: deployer
@@ -82,7 +85,7 @@ stages:
       fi
       
       # Tracking Metrics
-      if [ "YES" != "$DISABLE_METRIC" ]; then
+      if [ "NO" != "$DISABLE_METRIC" ]; then
       echo "============================================================="
       echo "Adding deployment data to metrics tracker... "
       echo "============================================================="
@@ -105,7 +108,7 @@ stages:
       EOF
       )
 
-      callback=$(curl -d "$data" -H "Content-Type: application/json" -X POST http://metrics-tracker.mybluemix.net/api/v1/track)
+      callback=$(curl -d "$data" -H "Content-Type: application/json" -X POST $TRACKER_URL)
       if [[ "$callback" == *"true"* ]]; then 
         echo "metrics sent successfully"
       else
