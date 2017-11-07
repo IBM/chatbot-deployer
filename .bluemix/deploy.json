@@ -37,7 +37,11 @@
             "description": {
                 "$ref": "#/messages/deploy.metricsDescription"
             },
-            "type": "string"
+            "type": "string",
+                "enum": [
+                "NO",
+                "YES"
+             ]
         }
     },
     "required": [
@@ -60,10 +64,23 @@
             "key": "prod-app-name"
         },
         {
-            "type": "text",
-            "readonly": false,
-            "title": "Disable Metrics Tracker",
-            "key": "metrics-tracker"
+        "type": "selectfieldset",
+        "readonly": false,
+        "key": "metrics-tracker",
+        "titleMap": {
+           "NO": "NO",
+           "YES": "YES",
+        },
+        "items": [
+            {
+              "type": "section",
+	          "description": "Enable metrics tracker.",
+            }, 
+            {
+              "type": "section",
+	          "description": "Disable metrics tracker",
+            }
+            ]
         },
         {
             "type": "table",

@@ -45,8 +45,8 @@ The DevOps pipeline that is included in this package is configured by default wi
 * Conversation Service GUID
 * Chatbot Name
 
-This data is collected from the Bluemix DevOps pipeline environment variables in IBM Bluemix. This data is used by IBM to track metrics around deployments of sample applications to IBM Bluemix to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
+By default, this data is collected from the IBM Cloud DevOps pipeline environment variables in IBM Cloud. This data is used by IBM to track metrics around deployments of sample applications to IBM Cloud to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
 
 ## Disabling Deployment Tracking
 
-To disable the tracker, Simply put down `yes` in *Disable Metrics Tracker* under the **Delivery Pipeline** section when you create your Bluemix DevOps pipeline.
+To opt-out the tracker, Simply select `YES` in *Disable Metrics Tracker* under the **Delivery Pipeline** section when you create your IBM Cloud DevOps pipeline.
