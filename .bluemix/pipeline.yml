@@ -114,7 +114,11 @@ stages:
         else
           echo "metrics server error. Skipping..."
         fi
-      
+        
+      else
+        echo "============================================================="
+        echo "Opt-out metrics tracker"
+        echo "============================================================="
       fi
 
 
