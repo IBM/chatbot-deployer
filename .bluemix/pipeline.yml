@@ -72,7 +72,7 @@ stages:
       resp=$( curl --user $wcuser:$wcpass \
                  -H "Content-Type: application/json" \
                  -X POST -d @workspace.json \
-                 $wcurl/v1/workspaces?version=2017-04-21 )
+                 $wcurl/v1/workspaces?version=2017-05-26 )
       echo $resp | json
       WORKSPACE_ID=$( echo $resp | json workspace_id )
 
