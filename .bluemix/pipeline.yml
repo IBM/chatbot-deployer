@@ -83,7 +83,7 @@ stages:
         echo "https://www.ibmwatsonconversation.com"
         exit 1
       fi
-
+      
       # Tracking Metrics
       if [ "NO" != "$DISABLE_METRIC" ]; then
         echo "============================================================="
@@ -94,7 +94,7 @@ stages:
         config='{"repository_id": "chatbot-deployer",
                "target_runtimes": [],
                "target_services": ["Conversation"],
-               "event_id": "web",
+               "event_id": "web", 
                "event_organizer": "dev-journeys"}'
         DATE=$(date '+%Y-%m-%d %H:%M:%S')
         data=$(cat <<-EOF
@@ -109,12 +109,12 @@ stages:
         )
 
         callback=$(curl -d "$data" -H "Content-Type: application/json" -X POST $TRACKER_URL)
-        if [[ "$callback" == *"true"* ]]; then
+        if [[ "$callback" == *"true"* ]]; then 
           echo "metrics sent successfully"
         else
           echo "metrics server error. Skipping..."
         fi
-
+        
       else
         echo "============================================================="
         echo "Opt-out metrics tracker"
