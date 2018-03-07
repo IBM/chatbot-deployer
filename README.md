@@ -1,8 +1,8 @@
-![Bluemix Deployments](https://metrics-tracker.mybluemix.net/stats/3dafda64b9efbd06391d5f090bd89113/badge.svg)
+![IBM Cloud Deployments](https://metrics-tracker.mybluemix.net/stats/3dafda64b9efbd06391d5f090bd89113/badge.svg)
 
-# Bluemix Pipeline based Chatbot Deployer
+# IBM Cloud Pipeline based Chatbot Deployer
 
-The chatbot deployer is a [Bluemix pipeline](https://console.bluemix.net/docs/services/ContinuousDelivery/pipeline_working.html#pipeline-working) plugin that is to be used in the new [Bot Asset Exchange](https://developer.ibm.com/code/exchanges/bots/).
+The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs/services/ContinuousDelivery/pipeline_working.html#pipeline-working) plugin that is to be used in the new [Bot Asset Exchange](https://developer.ibm.com/code/exchanges/bots/).
 
 ### How do I use it?
 
@@ -10,7 +10,7 @@ The chatbot deployer is a [Bluemix pipeline](https://console.bluemix.net/docs/se
 
 ![](data/get_bot.png)
 
-2. Log into Bluemix if prompted
+2. Log into IBM Cloud if prompted
 3. Choose to create the pipeline
 4. That's it! Now now click the _Watson Conversation_ icon to see the new _Watson Conversation_ service (entitled `Bot Asset Exchange Workspaces`) that was just created.
 5. Launch the _Watson Conversation_ service, find the workspace (the bot you picked!).
@@ -23,7 +23,7 @@ The chatbot deployer is a [Bluemix pipeline](https://console.bluemix.net/docs/se
 
 Clicking the `Get this bot` button will:
 
-* Create an Bluemix DevOps pipeline
+* Create an IBM Cloud DevOps pipeline
 * Create a _Watson Conversation_ service called `Bot Asset Exchange Workspaces`
 * Upload the `workspace.json` file, which represents the bot you selected, into the newly created service
 
