@@ -12,8 +12,8 @@ The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs
 
 2. Log into IBM Cloud if prompted
 3. Choose to create the pipeline
-4. That's it! Now now click the _Watson Conversation_ icon to see the new _Watson Conversation_ service (entitled `Bot Asset Exchange Workspaces`) that was just created.
-5. Launch the _Watson Conversation_ service, find the workspace (the bot you picked!).
+4. That's it! Now now click the _Watson Assistant_ icon to see the new _Watson Assistant_ service (entitled `Bot Asset Exchange Workspaces`) that was just created.
+5. Launch the _Watson Assistant_ service, find the workspace (the bot you picked!).
 
 #### As an example:
 
@@ -24,7 +24,7 @@ The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs
 Clicking the `Get this bot` button will:
 
 * Create an IBM Cloud DevOps pipeline
-* Create a _Watson Conversation_ service called `Bot Asset Exchange Workspaces`
+* Create a _Watson Assistant_ service called `Bot Asset Exchange Workspaces`
 * Upload the `workspace.json` file, which represents the bot you selected, into the newly created service
 
 ### Testing it out:
@@ -42,7 +42,7 @@ Click [this link](https://console.bluemix.net/devops/setup/deploy?repository=htt
 The DevOps pipeline that is included in this package is configured by default with a [Deployment Tracker](https://github.com/IBM/metrics-collector-service) tool. The following information is sent when a user deploys an asset from the Bot Asset Exchange:
 
 * Space ID
-* Conversation Service GUID
+* Watson Assistant Service GUID
 * Chatbot Name
 
 By default, this data is collected from the IBM Cloud DevOps pipeline environment variables in IBM Cloud. This data is used by IBM to track metrics around deployments of sample applications to IBM Cloud to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
