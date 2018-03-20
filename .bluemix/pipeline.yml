@@ -80,7 +80,7 @@ stages:
       if [ -z "$WORKSPACE_ID" ]; then
         echo "Failed creating new workspace..."
         echo "If too many workspaces already, discard obsolete workspaces using: "
-        echo "https://www.ibmwatsonconversation.com"
+        echo "https://watson-assistant.ng.bluemix.net/instances"
         exit 1
       fi
 
@@ -136,7 +136,7 @@ stages:
       resp_wsid=$( echo $resp | json workspace_id )
       if [ $status -ne 0 ] || [ "$resp_wsid" != "$WORKSPACE_ID" ]; then
         echo "Invalid workspace: $WORKSPACE_ID"
-        echo "Administer your workspaces at: https://www.ibmwatsonconversation.com"
+        echo "Administer your workspaces at: https://watson-assistant.ng.bluemix.net/instances"
         exit 1
       fi
 hooks:
