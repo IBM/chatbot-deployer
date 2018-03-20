@@ -10,7 +10,7 @@ services:
   conversation-service:
     service_id: customtool
     parameters:
-      type: Watson Conversation
+      type: Watson Assistant
       lifecyclePhase: "MANAGE"
       imageUrl: https://watson-api-explorer.mybluemix.net/images/watson-apis/Assistant.svg
       documentationUrl: https://console.bluemix.net/docs/services/conversation/index.html#about
