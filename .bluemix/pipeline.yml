@@ -8,15 +8,6 @@ stages:
   - name: CHATBOT_NAME
     value: '${CHATBOT_NAME}'
     type: text
-  - name: CHATBOT_NAME_RAW
-    value: '${CHATBOT_NAME_RAW}'
-    type: text
-  - name: DISABLE_METRIC
-    value: '${DISABLE_METRIC}'
-    type: text
-  - name: TRACKER_URL
-    value: '${TRACKER_URL}'
-    type: text
   jobs:
   - name: Deploy Chatbot Assets
     type: deployer
@@ -83,44 +74,6 @@ stages:
         echo "https://watson-assistant.ng.bluemix.net/instances"
         exit 1
       fi
-
-      # Tracking Metrics
-      if [ "NO" != "$DISABLE_METRIC" ]; then
-        echo "============================================================="
-        echo "Adding deployment data to metrics tracker... "
-        echo "============================================================="
-        space_id=$(cf space ${CF_SPACE} --guid)
-        service_id=$(cf service "Bot Asset Exchange Workspaces" --guid)
-        config='{"repository_id": "chatbot-deployer",
-               "target_runtimes": [],
-               "target_services": ["Conversation"],
-               "event_id": "web",
-               "event_organizer": "dev-journeys"}'
-        DATE=$(date '+%Y-%m-%d %H:%M:%S')
-        data=$(cat <<-EOF
-        {
-        "space_id": "$space_id",
-        "service_id": "$service_id",
-        "date_sent":"$DATE",
-        "bot_name": "$CHATBOT_NAME_RAW",
-        "config": $config
-        }
-      EOF
-        )
-
-        callback=$(curl -d "$data" -H "Content-Type: application/json" -X POST $TRACKER_URL)
-        if [[ "$callback" == *"true"* ]]; then
-          echo "metrics sent successfully"
-        else
-          echo "metrics server error. Skipping..."
-        fi
-
-      else
-        echo "============================================================="
-        echo "Opt-out metrics tracker"
-        echo "============================================================="
-      fi
-
 
       # Print success
       echo "=================================================="

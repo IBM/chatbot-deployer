@@ -30,12 +30,9 @@ services:
         env:
           CHATBOT_JSON_URL: '{{chatbotWorkspaceURL}}'
           CHATBOT_NAME: '{{chatbotName}}-{{timestamp}}'
-          CHATBOT_NAME_RAW: '{{chatbotName}}'
-          DISABLE_METRIC: '{{form.pipeline.parameters.metrics-tracker}}'
           PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
           PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
           PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
-          TRACKER_URL: 'http://metrics-tracker.mybluemix.net/api/v1/track'
         execute: true
 form:
   pipeline:

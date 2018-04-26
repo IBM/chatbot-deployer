@@ -32,16 +32,6 @@
             },
             "type": "string",
             "pattern": "\\S"
-        },
-        "metrics-tracker": {
-            "description": {
-                "$ref": "#/messages/deploy.metricsDescription"
-            },
-            "type": "string",
-                "enum": [
-                "YES",
-                "NO"
-             ]
         }
     },
     "required": [
@@ -62,25 +52,6 @@
                 "$ref": "#/messages/deploy.appName"
             },
             "key": "prod-app-name"
-        },
-        {
-        "type": "selectfieldset",
-        "readonly": false,
-        "key": "metrics-tracker",
-        "titleMap": {
-           "YES": "YES",
-           "NO": "NO",
-        },
-        "items": [
-            {
-              "type": "section",
-	          "description": "Enable metrics tracker.",
-            },
-            {
-              "type": "section",
-	          "description": "Disable metrics tracker",
-            }
-            ]
         },
         {
             "type": "table",
