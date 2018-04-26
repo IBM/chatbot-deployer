@@ -10,7 +10,7 @@ The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs
 
 2. Log into IBM Cloud if prompted
 3. Choose to create the pipeline
-4. That's it! Now now click the _Watson Assistant_ icon to see the new _Watson Assistant_ service (entitled `Bot Asset Exchange Workspaces`) that was just created.
+4. That's it! Now click the _Watson Assistant_ icon to see the new _Watson Assistant_ service (entitled `Bot Asset Exchange Workspaces`) that was just created.
 5. Launch the _Watson Assistant_ service, find the workspace (the bot you picked!).
 
 #### As an example:
