@@ -4,7 +4,9 @@ The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs
 
 ### How do I use it?
 
-1. Navigate over to the [Bot Asset Exchange](https://developer.ibm.com/code/exchanges/bots/) and click the `Get this bot` button.
+1. Navigate over to the [Bot Asset Exchange](https://developer.ibm.com/code/exchanges/bots/) and click the `Deploy this bot` button.
+
+> NOTE: Alternatively you can click the `Get this bot` button to see the raw JSON content.
 
 ![](data/get_bot.png)
 
@@ -19,7 +21,7 @@ The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs
 
 ### What's it do?
 
-Clicking the `Get this bot` button will:
+Clicking the `Deploy this bot` button will:
 
 * Create an IBM Cloud DevOps pipeline
 * Create a _Watson Assistant_ service called `Bot Asset Exchange Workspaces`
