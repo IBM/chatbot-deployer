@@ -4,6 +4,8 @@ messages:
   $i18n: locales.yml
 template:
   name: "Chatbot Asset Deployment"
+  required:
+    - load-bot-assets
 toolchain:
   name: 'chatbot-deploy-{{chatbotName}}-{{timestamp}}'
 services:
