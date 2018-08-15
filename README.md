@@ -6,18 +6,49 @@ The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs
 
 1. Navigate over to the [Bot Asset Exchange](https://developer.ibm.com/code/exchanges/bots/) and click the `Deploy this bot` button.
 
-> NOTE: Alternatively you can click the `Get this bot` button to see the raw JSON content.
+   > NOTE: Alternatively you can click the `Get this bot` button to see the raw JSON content.
 
-![](data/get_bot.png)
+   ![](images/get-bot.png)
 
-2. Log into IBM Cloud if prompted
-3. Choose to create the pipeline
-4. That's it! Now click the _Watson Assistant_ icon to see the new _Watson Assistant_ service (entitled `Bot Asset Exchange Workspaces`) that was just created.
-5. Launch the _Watson Assistant_ service, find the workspace (the bot you picked!).
+2. Log into IBM Cloud if prompted.
 
-#### As an example:
+3. You'll be prompted to create a toolchain pipeline with a Watson Assistant service. Before clicking _Create_ we have to generate an API key.
 
-![](data/launch.gif)
+   ![](images/initial-load.png)
+
+4. Click on the _Delivery Pipeline_ icon.
+
+   ![](images/missing-key.png)
+
+5. Enter an application name and click on `Create (+)` to generate an API key. This should fill in the region information.
+
+   ![](images/apikey.png)
+
+   _Now we're ready to deploy!_
+
+   ![](images/ready-to-deploy.png)
+
+6. Once the API key is generated you can _Create_ the toolchain, you'll be brought to an overview page.
+
+   ![](images/configured.png)
+
+7. Optionally, check the deployment log.
+
+   ![](images/deploy-log.png)
+
+8. That's it! Now click the _Watson Assistant_ icon to see the new _Watson Assistant_ service (entitled `Bot Asset Exchange Workspaces`) that was just created.
+
+   ![](images/assistant-credentials.png)
+
+9. Launch the _Watson Assistant_ service, find the workspace (the bot you picked!).
+
+   ![](images/workspaces.png)
+
+#### Here's an example:
+
+> This is only slightly outdated
+
+![](images/launch.gif)
 
 ### What's it do?
 
