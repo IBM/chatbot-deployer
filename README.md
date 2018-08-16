@@ -28,7 +28,7 @@ The chatbot deployer is an [IBM Cloud pipeline](https://console.bluemix.net/docs
 
    ![](images/ready-to-deploy.png)
 
-6. Once the API key is generated you can _Create_ the toolchain, you'll be brought to an overview page.
+6. Once the API key is generated you can _Create_ the toolchain, which will then take you to an overview page.
 
    ![](images/configured.png)
 
